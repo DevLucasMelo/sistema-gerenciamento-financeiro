@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block title %}Dashboard{% endblock %}
+
+    {% block content %}
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../static/imagens/logo_nova.png" alt="Logo da Empresa" class="d-inline-block align-text-top">
+            </a>
+    
+            <div class="ms-auto d-flex align-items-center">
+                <a href="{% url 'gerencia_financeiro' %}" class="btn btn-custom me-3">Gerenciar Financeiro</a>
+                
+                <div id="dropdown-logout" class="user-icon dropdown">
+                    <a href="#" class="dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="10" r="4"></circle>
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container mt-4">
+        <h1 class="mb-4 text-center">Dashboard Financeiro</h1>
+
+        <!-- Visão Geral Financeira -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Receita Total</h5>
+                        <p class="card-text">R$ {{ receitas_anual }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Despesas Totais</h5>
+                        <p class="card-text">R$ {{ despesas_anual }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Lucro Líquido</h5>
+                        <p class="card-text">R$ {{ lucro_liquido }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="form-group">
+                    <label for="chartTypeSelect">Tipo de Gráfico:</label>
+                    <select id="chartTypeSelect" class="form-control">
+                        <option value="bar">Barras</option>
+                        <option value="line">Linhas</option>
+                        <option value="pie">Pizza</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div class="col-md-6 mb-4">
+                <div class="form-group">
+                    <label for="timeIntervalSelect">Intervalo de Tempo:</label>
+                    <select id="timeIntervalSelect" class="form-control">
+                        <option value="semanal">Semanal</option>
+                        <option value="mensal">Mensal</option>
+                        <option value="anual">Anual</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos e Visualizações -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Receita vs. Despesa</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="receitaDespesaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Despesas por Categoria</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="despesasCategoriaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projeção de Fluxo de Caixa -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Projeção de Fluxo de Caixa</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="fluxoCaixaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+
+    {% block scripts %}
+
+    {% load static %}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script type="application/json" id="chartData">
+        {
+            "receitasSemanal": {{ valores_receitas|safe }},
+            "despesasSemanal": {{ valores_despesas|safe }},
+            "receitasMensal": {{ valores_receitas_mensal|safe }},
+            "despesasMensal": {{ valores_despesas_mensal|safe }},
+            "receitasAnual": {{ receitas_anual }},
+            "despesasAnual": {{ despesas_anual }}
+        }
+    </script>
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+    {% endblock %}
+
+</body>
+</html>

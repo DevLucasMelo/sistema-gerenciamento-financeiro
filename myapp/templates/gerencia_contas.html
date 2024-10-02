@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Gerenciar contas</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block title %}Gerencia contas{% endblock %}
+
+    {% block content %}
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../static/imagens/logo_nova.png" alt="Logo da Empresa" class="d-inline-block align-text-top">
+            </a>
+    
+            <div class="ms-auto d-flex align-items-center">
+                <a href="{% url 'gerencia_financeiro' %}" class="btn btn-custom me-3">Gerenciar Financeiro</a>
+                
+                <div id="dropdown-logout" class="user-icon dropdown">
+                    <a href="#" class="dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="10" r="4"></circle>
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Cadastro de Contas</h2>
+        
+        <!-- Formulário de Cadastro -->
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="cts_nome_titular_conta">Nome do Titular</label>
+                    <input type="text" class="form-control" id="cts_nome_titular_conta" name="nome_titular" placeholder="Nome do Titular">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="cts_cpf_cnpj">CPF/CNPJ</label>
+                    <input type="text" class="form-control" id="cts_cpf_cnpj" name="cpf_cnpj" placeholder="CPF ou CNPJ">
+                </div>
+            </div>
+        
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cts_tipo_conta">Tipo de Conta</label>
+                    <select id="cts_tipo_conta" class="form-control" name="tipo_conta">
+                        <option selected>Escolher...</option>
+                        <option value="Corrente">Corrente</option>
+                        <option value="Poupança">Poupança</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="cts_banco">Banco</label>
+                    <input type="text" class="form-control" id="cts_banco" name="banco" placeholder="Nome do Banco">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="cts_agencia">Agência</label>
+                    <input type="text" class="form-control" id="cts_agencia" name="agencia" placeholder="Número da Agência">
+                </div>
+            </div>
+        
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="cts_num_conta_digito">Número da Conta</label>
+                    <input type="text" class="form-control" id="cts_num_conta_digito" name="num_conta_digito" placeholder="Número da Conta com Dígito">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="cts_saldo_inicial">Saldo Inicial</label>
+                    <input type="number" class="form-control" id="cts_saldo_inicial" name="saldo_inicial" placeholder="Saldo Inicial">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="cts_saldo_atual">Saldo Atual</label>
+                    <input type="number" class="form-control" id="cts_saldo_atual" name="saldo_atual" placeholder="Saldo Atual">
+                </div>
+            </div>
+        
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success">Cadastrar Conta</button>
+            </div>
+        </form>
+        
+    </div>
+    {% endblock %}
+</body>
+</html>

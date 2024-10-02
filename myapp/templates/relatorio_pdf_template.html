@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Financeiro</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Relatório Financeiro</h1>
+    <p>Período: {{ data_inicio_formatada }} até {{ data_fim_formatada }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Data de Vencimento</th>
+                <th>Descrição</th>
+                <th>Tipo de Conta</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transacao in transacoes %}
+                <tr>
+                    <td>{{ transacao.tra_data_vencimento|date:"d/m/Y" }}</td>
+                    <td>{{ transacao.tra_descricao }}</td>
+                    <td>{{ transacao.tra_tipo }}</td>
+                    <td>
+                        {% if transacao.tra_tipo == 'Contas a Receber' %}
+                            {{ transacao.tra_valor }}
+                        {% elif transacao.tra_tipo == 'Contas a Pagar' %}
+                            -{{ transacao.tra_valor }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3"><strong>Total a Receber:</strong></td>
+                <td>{{ total_receber }}</td>
+            </tr>
+            <tr>
+                <td colspan="3"><strong>Total a Pagar:</strong></td>
+                <td>-{{ total_pagar }}</td>
+            </tr>
+            <tr></tr>
+                <td colspan="3"><strong>Lucro líquido:</strong></td>
+                <td>{{ lucro_liquido }}</td>
+            </tr>
+        </tfoot>
+
+    </table>
+</body>
+</html>
