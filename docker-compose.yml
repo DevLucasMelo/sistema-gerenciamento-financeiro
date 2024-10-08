@@ -18,3 +18,10 @@ services:
       POSTGRES_PASSWORD: wUxNCzoOZF8BaPqvTZstLJLRSEqkFPaz
     ports:
       - "5432:5432"
+
+  metabase:
+    image: metabase/metabase
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
