@@ -133,6 +133,7 @@ def transacoes_view(request):
     tipo_filtro = request.GET.get('tipo', '')
 
     if tipo_filtro:
+        print(tipo_filtro)
         transacoes = Transacoes.objects.filter(tra_tipo=tipo_filtro)
     else:
         transacoes = Transacoes.objects.all()

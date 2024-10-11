@@ -1,14 +1,45 @@
 from django.db import models
 from django.contrib.auth.hashers import check_password
 
+class Tipos_pagamentos(models.Model):
+    tip_pag_id = models.AutoField(primary_key=True) 
+    tip_pag_nome = models.CharField(max_length=255)
+   
+    class Meta:
+        db_table = 'tipos_pagamentos'  
+
+class Tipos_eletronicos(models.Model):
+    tip_ele_id = models.AutoField(primary_key=True) 
+    tip_ele_nome = models.CharField(max_length=255)
+   
+    class Meta:
+        db_table = 'tipos_eletronicos' 
+
+class Marcas(models.Model):
+    mar_id = models.AutoField(primary_key=True) 
+    mar_nome = models.CharField(max_length=255)
+   
+    class Meta:
+        db_table = 'marcas' 
+
+class Categorias(models.Model):
+    cat_id = models.AutoField(primary_key=True) 
+    cat_nome = models.CharField(max_length=255)
+   
+    class Meta:
+        db_table = 'categorias' 
 
 class Transacoes(models.Model):
     tra_id = models.AutoField(primary_key=True)  # Serial em PostgreSQL
     tra_cpf_cnpj = models.CharField(max_length=50)
-    tra_metodo_pagamento = models.CharField(max_length=100)
+    tra_tip_pag = models.ForeignKey(Tipos_pagamentos, on_delete=models.CASCADE, related_name='tipos_pagamentos')
     tra_valor = models.DecimalField(max_digits=10, decimal_places=2)
     tra_descricao = models.TextField()
     tra_tipo = models.CharField(max_length=100)
+    tra_tip_ele = models.ForeignKey(Tipos_eletronicos, on_delete=models.CASCADE, related_name='tipos_eletronicos')
+    tra_cat = models.ForeignKey(Categorias, on_delete=models.CASCADE, related_name='categorias')
+    tra_modelo = models.CharField(max_length=255)
+    tra_mar = models.ForeignKey(Marcas, on_delete=models.CASCADE, related_name='marcas')
     tra_data_criacao = models.DateField()
     tra_data_vencimento = models.DateField()
     tra_data_pagamento = models.DateField(null=True, blank=True)
@@ -59,3 +90,5 @@ class Enderecos(models.Model):
 
     class Meta:
         db_table = 'enderecos'  
+
+
