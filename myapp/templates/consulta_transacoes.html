@@ -15,7 +15,7 @@
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="../static/imagens/logo_nova.png" alt="Logo da Empresa" class="d-inline-block align-text-top">
+                <!-- <img src="../static/imagens/logo_nova.png" alt="Logo da Empresa" class="d-inline-block align-text-top"> -->
             </a>
     
             <div class="ms-auto d-flex align-items-center">
@@ -39,7 +39,7 @@
     
     <div class="container mt-4">
         <h1 class="mb-4">Listagem de Transações</h1>
-
+    
         <form method="get" class="mb-4">
             <div class="form-group">
                 <label for="tipo">Filtrar por Tipo</label>
@@ -53,116 +53,112 @@
                 <button type="submit" id="btn-filtro" class="btn btn-primary">Filtrar</button>
             </div>            
         </form>
+    
         {% if request.GET.tipo == 'Contas a Pagar' %}
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>CPF/CNPJ</th>
-                    <th>Método de Pagamento</th>
-                    <th>Descrição</th>
-                    <th>Tipo</th>
-                    <th>Data de Criação</th>
-                    <th>Data de Vencimento</th>
-                    <th>Data de Pagamento</th>
-                    <th>Pago</th>
-                    <th>Valor</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for transacao in transacoes %}
-
-                <tr>
-                    <td>{{ transacao.tra_id }}</td>
-                    <td>{{ transacao.tra_cpf_cnpj }}</td>
-                    <td>{{ transacao.tra_tip_pag.tip_pag_nome }}</td>
-                    <td>{{ transacao.tra_descricao }}</td>
-                    <td>{{ transacao.tra_tipo }}</td>
-                    <td>{{ transacao.tra_data_criacao|date:"d/m/Y" }}</td>
-                    <td>{{ transacao.tra_data_vencimento|date:"d/m/Y" }}</td>
-                    <td>{{ transacao.tra_data_pagamento|date:"d/m/Y" }}</td>
-                    <td>{{ transacao.tra_pago|yesno:"Sim,Não" }}</td>
-                    <td>{{ transacao.tra_valor }}</td>
-
-                </tr>
-
-                {% empty %}
-                <tr>
-                    <td colspan="10" class="text-center">Nenhuma transação encontrada.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="9" class="text-right"><strong>Total:</strong></td>
-                    <td><strong>{{ total_valor }}</strong></td>
-                    <td colspan="6"></td>
-                </tr>
-            </tfoot>
-        </table>
-
-        {% else  %}
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>CPF/CNPJ</th>
-                    <th>Método de Pagamento</th>
-                    <th>Descrição</th>
-                    <th>Tipo</th>
-                    <th>Tipo de eletrônico</th>
-                    <th>Categoria</th>
-                    <th>Modelo</th>
-                    <th>Tipo</th>
-                    <th>Data de Criação</th>
-                    <th>Data de Vencimento</th>
-                    <th>Data de Pagamento</th>
-                    <th>Pago</th>
-                    <th>Valor</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for transacao in transacoes %}
-
-                <tr>
-                    <td>{{ transacao.tra_id }}</td>
-                    <td>{{ transacao.tra_cpf_cnpj }}</td>
-                    <td>{{ transacao.tra_tip_pag.tip_pag_nome }}</td>
-                    <td>{{ transacao.tra_descricao }}</td>
-                    <td>{{ transacao.tra_tipo }}</td>
-                    <td>{{ transacao.tra_tip_ele.tip_ele_nome }}</td>
-                    <td>{{ transacao.tra_cat.cat_nome }}</td>
-                    <td>{{ transacao.tra_modelo }}</td>
-                    <td>{{ transacao.tra_mar.mar_nome}}</td>
-                    <td>{{ transacao.tra_data_criacao|date:"d/m/Y" }}</td>
-                    <td>{{ transacao.tra_data_vencimento|date:"d/m/Y" }}</td>
-                    <td>{{ transacao.tra_data_pagamento|date:"d/m/Y" }}</td>
-                    <td>{{ transacao.tra_pago|yesno:"Sim,Não" }}</td>
-                    <td>{{ transacao.tra_valor }}</td>
-
-                </tr>
-
-                {% empty %}
-                <tr>
-                    <td colspan="10" class="text-center">Nenhuma transação encontrada.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="9" class="text-right"><strong>Total:</strong></td>
-                    <td><strong>{{ total_valor }}</strong></td>
-                    <td colspan="6"></td>
-                </tr>
-            </tfoot>
-        </table>
-
-        {% endif %}
-
         
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Método de Pagamento</th>
+                        <th>Descrição</th>
+                        <th>Tipo</th>
+                        <th>Data de Criação</th>
+                        <th>Data de Vencimento</th>
+                        <th>Data de Pagamento</th>
+                        <th>Pago</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transacao in page_obj %}
+                    <tr>
+                        <td>{{ transacao.tra_id }}</td>
+                        <td>{{ transacao.tra_cpf_cnpj }}</td>
+                        <td>{{ transacao.tra_tip_pag.tip_pag_nome }}</td>
+                        <td>{{ transacao.tra_descricao }}</td>
+                        <td>{{ transacao.tra_tipo }}</td>
+                        <td>{{ transacao.tra_data_criacao|date:"d/m/Y" }}</td>
+                        <td>{{ transacao.tra_data_vencimento|date:"d/m/Y" }}</td>
+                        <td>{{ transacao.tra_data_pagamento|date:"d/m/Y" }}</td>
+                        <td>{{ transacao.tra_pago|yesno:"Sim,Não" }}</td>
+                        <td>{{ transacao.tra_valor }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="10" class="text-center">Nenhuma transação encontrada.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="9" class="text-right"><strong>Total:</strong></td>
+                        <td><strong>{{ total_valor }}</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div> 
+        
+        {% else %}
+        
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Método de Pagamento</th>
+                        <th>Descrição</th>
+                        <th>Tipo</th>
+                        <th>Tipo de eletrônico</th>
+                        <th>Categoria</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Data de Criação</th>
+                        <th>Data de Vencimento</th>
+                        <th>Data de Pagamento</th>
+                        <th>Pago</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transacao in page_obj %}
+                    <tr>
+                        <td>{{ transacao.tra_id }}</td>
+                        <td>{{ transacao.tra_cpf_cnpj }}</td>
+                        <td>{{ transacao.tra_tip_pag.tip_pag_nome }}</td>
+                        <td>{{ transacao.tra_descricao }}</td>
+                        <td>{{ transacao.tra_tipo }}</td>
+                        <td>{{ transacao.tra_tip_ele.tip_ele_nome }}</td>
+                        <td>{{ transacao.tra_cat.cat_nome }}</td>
+                        <td>{{ transacao.tra_modelo }}</td>
+                        <td>{{ transacao.tra_mar.mar_nome }}</td>
+                        <td>{{ transacao.tra_data_criacao|date:"d/m/Y" }}</td>
+                        <td>{{ transacao.tra_data_vencimento|date:"d/m/Y" }}</td>
+                        <td>{{ transacao.tra_data_pagamento|date:"d/m/Y" }}</td>
+                        <td>{{ transacao.tra_pago|yesno:"Sim,Não" }}</td>
+                        <td>{{ transacao.tra_valor }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="14" class="text-center">Nenhuma transação encontrada.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="13" class="text-right"><strong>Total:</strong></td>
+                        <td><strong>{{ total_valor }}</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div> 
+        
+        {% endif %}
     </div>
+    
 
     {% endblock %}
 </body>

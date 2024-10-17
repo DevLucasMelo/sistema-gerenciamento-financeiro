@@ -92,3 +92,28 @@ class Enderecos(models.Model):
         db_table = 'enderecos'  
 
 
+class OrdemServicos(models.Model):
+    ord_ser_id = models.AutoField(primary_key=True)
+    ord_ser_cli_nome = models.CharField(max_length=255)
+    ord_ser_cli_cpf_cnpj = models.CharField(max_length=20)
+    ord_ser_cli_telefone = models.CharField(max_length=20, blank=True)
+    ord_ser_cli_email = models.EmailField(max_length=255, blank=True)
+    ord_ser_cli_logradouro = models.TextField(blank=True)
+    ord_ser_cli_numero = models.TextField(blank=True)
+    ord_ser_cli_cidade = models.TextField(blank=True)
+    ord_ser_cli_estado= models.TextField(blank=True)
+    ord_ser_cli_cep = models.TextField(blank=True)
+    ord_ser_numero = models.CharField(max_length=50, blank=True, unique=True)
+    ord_ser_data_abertura = models.DateField(auto_now_add=True)
+    ord_ser_data_prevista = models.DateField(null=True, blank=True)
+    ord_ser_descricao = models.TextField(blank=True)
+    ord_ser_categoria = models.CharField(max_length=100, blank=True)
+    ord_ser_tecnico_responsavel = models.CharField(max_length=255, blank=True)
+    ord_ser_itens_utilizados = models.TextField(blank=True)
+    ord_ser_valor = models.DecimalField(max_digits=10, decimal_places=2)
+    ord_ser_status = models.CharField(max_length=50, default='Em andamento')
+    ord_ser_garantia = models.CharField(max_length=100, blank=True)
+
+    class Meta:
+        db_table = 'ordem_servicos'
+

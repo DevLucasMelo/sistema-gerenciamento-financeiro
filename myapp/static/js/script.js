@@ -4,20 +4,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const ctx = document.getElementById('receitaDespesaChart').getContext('2d');
 
-    // Função para criar ou atualizar o gráfico
     let receitaDespesaChart;
 
     function createChart(type, labels, timeInterval, primeiroReceitas, segundoReceitas, terceiroReceitas, primeiroDespesas, segundoDespesas, terceiroDespesas) {
         if (receitaDespesaChart) {
-            receitaDespesaChart.destroy();  // Remove gráfico anterior
+            receitaDespesaChart.destroy();  
         }
     
         let datasets;
     
         if (type === 'pie') {
-            // Para gráfico de pizza, crie um único dataset
+            
             datasets = [{
-                // Remover o label do dataset
+                
                 data: [
                     primeiroReceitas, 
                     segundoReceitas, 
@@ -25,29 +24,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     primeiroDespesas, 
                     segundoDespesas, 
                     terceiroDespesas
-                ], // Dados das receitas e despesas
+                ], 
                 backgroundColor: ['#007bff', '#dc3545', '#28a745', '#ffc107', '#17a2b8', '#6f42c1'],
                 hoverBackgroundColor: ['#0056b3', '#c82333', '#1e7e34', '#d39e00', '#138496', '#5a2e91']
             }];
         } else {
-            // Para outros gráficos, usar dois datasets separados
+            
             datasets = [
                 {
                     label: 'Receitas',
                     data: [primeiroReceitas, segundoReceitas, terceiroReceitas],
-                    backgroundColor: '#007bff',  // Azul
-                    hoverBackgroundColor: '#0056b3' // Azul escuro
+                    backgroundColor: '#007bff',  
+                    hoverBackgroundColor: '#0056b3' 
                 },
                 {
                     label: 'Despesas',
                     data: [primeiroDespesas, segundoDespesas, terceiroDespesas],
-                    backgroundColor: '#dc3545',  // Vermelho
-                    hoverBackgroundColor: '#c82333' // Vermelho escuro
+                    backgroundColor: '#dc3545',  
+                    hoverBackgroundColor: '#c82333' 
                 }
             ];
         }
     
-        // Criação do gráfico com a configuração
+        
         if (timeInterval == 'semanal') {
             receitaDespesaChart = new Chart(ctx, {
                 type: type,
@@ -81,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-         // Criação do gráfico com a configuração
+         
         else if (timeInterval == 'mensal') {
             receitaDespesaChart = new Chart(ctx, {
                 type: type,
@@ -147,14 +146,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
 
-    // Função para atualizar o gráfico de acordo com os selects
+    
     function updateChart() {
         const chartType = document.getElementById('chartTypeSelect').value;
         const timeInterval = document.getElementById('timeIntervalSelect').value;
 
         let labels, receitas, despesas;
 
-        // Ajustar os dados com base no intervalo de tempo selecionado
+        
         if (timeInterval === 'semanal') {
             labels = chartData.semanas;
             receitas = chartData.receitasSemanal;
@@ -195,19 +194,38 @@ document.addEventListener('DOMContentLoaded', function() {
             } 
 
         } else if (timeInterval === 'anual') {
-            labels = ['Receitas', 'Despesas'];  // Para anual, você pode usar apenas dois rótulos
+            labels = ['Receitas', 'Despesas'];  
             receitas = [chartData.receitasAnual];
             despesas = [chartData.despesasAnual];
         }
 
-        // Criar o gráfico com o tipo selecionado
+        
         createChart(chartType, labels, timeInterval, primeiroReceitas, segundoReceitas, terceiroReceitas, primeiroDespesas, segundoDespesas, terceiroDespesas);
     }
 
-    // Event listeners para os selects
+    
     document.getElementById('chartTypeSelect').addEventListener('change', updateChart);
     document.getElementById('timeIntervalSelect').addEventListener('change', updateChart);
 
-    // Inicializar o gráfico com os valores padrão (ex: Barras, Semanal)
+    
     updateChart();
 });
+
+
+document.getElementById('relatorioForm').addEventListener('submit', function(event) {
+    const dataInicio = document.getElementById('data_inicio').value;
+    const dataFim = document.getElementById('data_fim').value;
+    const email = document.getElementById('email').value;
+  
+    const mensagemErro = document.getElementById('mensagemErro');
+    
+    if (!dataInicio || !dataFim || !email) {
+      event.preventDefault();
+  
+      mensagemErro.innerHTML = 'Por favor, preencha todos os campos: Data Início, Data Fim e Email.';
+      mensagemErro.style.display = 'block';
+    } else {
+      mensagemErro.style.display = 'none';
+    }
+  });
+  

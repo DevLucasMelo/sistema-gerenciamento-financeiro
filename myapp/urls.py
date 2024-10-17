@@ -10,5 +10,8 @@ urlpatterns = [
     path('consulta_transacoes/', views.transacoes_view, name='consulta_transacoes'),
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('relatorio_financeiro/', views.relatorio_financeiro_view, name='relatorio_financeiro'),
+    path('ordem_servico/', views.ordem_servico_view, name='ordem_servico'),
+    path('gera_ordem_servico/', views.gera_ordem_servico_view, name='gera_ordem_servico'),
+    path('consulta_ordem_servico/', views.consulta_ordem_servico_view, name='consulta_ordem_servico'),
     path('logout/', views.logout_view, name='logout'),
 ]

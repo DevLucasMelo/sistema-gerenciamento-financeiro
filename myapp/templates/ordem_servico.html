@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Gerenciamento</title>
+    <title>Ordem de serviço</title>
 </head>
 <body>
     {% extends 'base.html' %}
-
-    {% block title %}Gerencia financeiro{% endblock %}
+    {% block title %}Ordem servico{% endblock %}
 
     {% block content %}
 
@@ -35,46 +34,22 @@
             </div>
         </div>
     </nav>
-    
-    <div class="container">
-        <h1 class="text-center mt-5">Painel de Gerenciamento</h1>
-        <div class="row panel-container">
 
+    <div class="container">
+        <h1>Ordem de Serviço</h1>
+
+        <div class="row panel-container">
+           
             <div class="col-sm-6 col-md-4 mb-4">
-                <a href="{% url 'ordem_servico' %}" class="dashboard-panel text-decoration-none">
-                    <i class="fas fa-bullseye"></i> 
-                    <div class="dashboard-panel-title">Ordens de serviço</div>
-                </a>
-            </div>
-            
-            <div class="col-sm-6 col-md-4 mb-4">
-                <a href="{% url 'gerencia_contas' %}" class="dashboard-panel text-decoration-none">
-                    <i class="fas fa-wallet"></i> 
-                    <div class="dashboard-panel-title">Gerenciar Contas</div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-md-4 mb-4">
-                <a href="{% url 'gerencia_usuarios' %}" class="dashboard-panel text-decoration-none">
-                    <i class="fas fa-users"></i> 
-                    <div class="dashboard-panel-title">Gerenciar Usuários</div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-md-4 mb-4">
-                <a href="{% url 'consulta_transacoes' %}" class="dashboard-panel text-decoration-none">
-                    <i class="fas fa-list-alt"></i> 
-                    <div class="dashboard-panel-title">Consultar Transações</div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-md-4 mb-4">
-                <a href="http://localhost:3000/public/dashboard/d75d090b-2674-4bc7-9e58-5061eb631bad" class="dashboard-panel text-decoration-none">
+                <a href="{% url 'gera_ordem_servico' %}" class="dashboard-panel text-decoration-none">
                     <i class="fas fa-chart-line"></i> 
-                    <div class="dashboard-panel-title">Dashboard</div>
+                    <div class="dashboard-panel-title">Gerar ordens de serviços</div>
                 </a>
             </div>
             <div class="col-sm-6 col-md-4 mb-4">
-                <a href="{% url 'relatorio_financeiro' %}" class="dashboard-panel text-decoration-none">
+                <a href="{% url 'consulta_ordem_servico' %}" class="dashboard-panel text-decoration-none">
                     <i class="fas fa-file-alt"></i> 
-                    <div class="dashboard-panel-title">Relatórios Financeiros</div>
+                    <div class="dashboard-panel-title">Consultar ordens de serviços</div>
                 </a>
             </div>
             

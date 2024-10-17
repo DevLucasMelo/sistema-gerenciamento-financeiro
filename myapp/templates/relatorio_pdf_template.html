@@ -4,42 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório Financeiro</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table, th, td {
-            border: 1px solid black;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
-    <h1>Relatório Financeiro</h1>
-    <p>Período: {{ data_inicio_formatada }} até {{ data_fim_formatada }}</p>
+<body class="body-relatorio-template">
+    <h1 id="titulo">Relatório Financeiro</h1>
+    <p id="periodo">Período: {{ data_inicio_formatada }} até {{ data_fim_formatada }}</p>
 
-    <table>
+    <table id="tabela-relatorio">
         <thead>
             <tr>
-                <th>Data de Vencimento</th>
-                <th>Descrição</th>
-                <th>Tipo de Conta</th>
-                <th>Valor</th>
+                <th data-label="Data de Vencimento">Data de Vencimento</th>
+                <th data-label="Descrição">Descrição</th>
+                <th data-label="Tipo de Conta">Tipo de Conta</th>
+                <th data-label="Valor">Valor</th>
             </tr>
         </thead>
         <tbody>
             {% for transacao in transacoes %}
                 <tr>
-                    <td>{{ transacao.tra_data_vencimento|date:"d/m/Y" }}</td>
-                    <td>{{ transacao.tra_descricao }}</td>
-                    <td>{{ transacao.tra_tipo }}</td>
-                    <td>
+                    <td data-label="Data de Vencimento">{{ transacao.tra_data_vencimento|date:"d/m/Y" }}</td>
+                    <td data-label="Descrição">{{ transacao.tra_descricao }}</td>
+                    <td data-label="Tipo de Conta">{{ transacao.tra_tipo }}</td>
+                    <td data-label="Valor" class="{% if transacao.tra_tipo == 'Contas a Pagar' %}negativo{% endif %}">
                         {% if transacao.tra_tipo == 'Contas a Receber' %}
                             {{ transacao.tra_valor }}
                         {% elif transacao.tra_tipo == 'Contas a Pagar' %}
@@ -53,18 +39,17 @@
         <tfoot>
             <tr>
                 <td colspan="3"><strong>Total a Receber:</strong></td>
-                <td>{{ total_receber }}</td>
+                <td class="positivo">{{ total_receber }}</td>
             </tr>
             <tr>
                 <td colspan="3"><strong>Total a Pagar:</strong></td>
-                <td>-{{ total_pagar }}</td>
+                <td class="negativo">-{{ total_pagar }}</td>
             </tr>
-            <tr></tr>
+            <tr>
                 <td colspan="3"><strong>Lucro líquido:</strong></td>
                 <td>{{ lucro_liquido }}</td>
             </tr>
         </tfoot>
-
     </table>
 </body>
 </html>

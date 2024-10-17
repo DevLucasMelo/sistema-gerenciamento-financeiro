@@ -16,6 +16,8 @@ services:
       POSTGRES_DB: sistema_financeiro
       POSTGRES_USER: sistema_financeiro_user
       POSTGRES_PASSWORD: wUxNCzoOZF8BaPqvTZstLJLRSEqkFPaz
+    volumes:
+      - db-data:/var/lib/postgresql/data  # Adiciona persistência
     ports:
       - "5432:5432"
 
@@ -25,3 +27,9 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    volumes:
+      - metabase-data:/metabase-data  # Adiciona persistência
+
+volumes:
+  db-data:   # Volume para o banco de dados
+  metabase-data:  # Volume para o Metabase
