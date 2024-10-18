@@ -1,5 +1,5 @@
 import base64
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.core.mail import EmailMessage
@@ -384,3 +384,8 @@ def consulta_ordem_servico_view(request):
 
     return render(request, 'consulta_ordem_servico.html', {'ordemServicos': ordemServicos})
     
+def imprime_ordem_servico_view(request, numero):
+
+    ordem_servico = get_object_or_404(OrdemServicos, ord_ser_numero=numero)
+    print(ordem_servico)
+    return render(request, 'ordem_servico_template.html', {'ordem_servico': ordem_servico})

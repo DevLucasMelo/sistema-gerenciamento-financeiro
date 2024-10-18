@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imprimir ordem de serviço</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block title %}Ordem servico{% endblock %}
+
+    {% block content %}
+
+    <div class="container mt-5">
+        <h2>Ordem de Serviço</h2>
+        <form>
+            <!-- Campos da ordem de serviço -->
+            <div class="mb-3">
+                <label for="clienteNome" class="form-label">Nome do Cliente</label>
+                <input type="text" class="form-control" id="clienteNome" value="{{ ordem_servico.ord_ser_cli_nome }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="clienteTelefone" class="form-label">Telefone</label>
+                <input type="text" class="form-control" id="clienteTelefone" value="{{ ordem_servico.ord_ser_cli_telefone }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="clienteEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="clienteEmail" value="{{ ordem_servico.ord_ser_cli_email }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="numeroOrdem" class="form-label">Número da Ordem</label>
+                <input type="text" class="form-control" id="numeroOrdem" value="{{ ordem_servico.ord_ser_numero }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="dataAbertura" class="form-label">Data de Abertura</label>
+                <input type="date" class="form-control" id="dataAbertura" value="{{ ordem_servico.ord_ser_data_abertura }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="dataPrevista" class="form-label">Data Prevista</label>
+                <input type="date" class="form-control" id="dataPrevista" value="{{ ordem_servico.ord_ser_data_prevista }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" rows="3" readonly>{{ ordem_servico.ord_ser_descricao }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="categoria" class="form-label">Categoria</label>
+                <input type="text" class="form-control" id="categoria" value="{{ ordem_servico.ord_ser_categoria }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="tecnicoResponsavel" class="form-label">Técnico Responsável</label>
+                <input type="text" class="form-control" id="tecnicoResponsavel" value="{{ ordem_servico.ord_ser_tecnico_responsavel }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="itensUtilizados" class="form-label">Itens Utilizados</label>
+                <textarea class="form-control" id="itensUtilizados" rows="3" readonly>{{ ordem_servico.ord_ser_itens_utilizados }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="valor" class="form-label">Valor</label>
+                <input type="text" class="form-control" id="valor" value="{{ ordem_servico.ord_ser_valor }}" readonly>
+            </div>
+        </form>
+        
+        <!-- Botão para imprimir -->
+        <button id="btn-imprimir" type="button" class="btn btn-primary mt-3" onclick="imprimirOrdemServico()">Imprimir Ordem de Serviço</button>
+    </div>
+    {% endblock %}
+
+    {% block scripts %}
+
+    {% load static %}
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+            function imprimirOrdemServico() {
+                // Remove o botão antes de imprimir
+                const botaoImprimir = document.getElementById('btn-imprimir');
+                botaoImprimir.style.display = 'none'; // Esconde o botão
+
+                window.print(); // Aciona a impressão
+
+                // Opcional: reexibe o botão após a impressão
+                botaoImprimir.style.display = 'inline-block';
+            }
+
+            // Atribui a função ao evento de clique no botão
+            document.getElementById('btn-imprimir').onclick = imprimirOrdemServico;
+        });
+    </script>
+
+    {% endblock %}
+
+
+</body>
+</html>
