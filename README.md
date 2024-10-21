@@ -22,7 +22,11 @@ Para executar o projeto será necessário utilizar o docker:
 
 3. Acessar o projeto no navegador através da URL: http://localhost:8000/
 
+4. Clique em "Realizar login"
 
+5. Utilize o e-mail: maria.silva@email.com e senha: senha123
+
+6. Teste as funcionalidades da aplicação 
 
 
 Principais dependências:
