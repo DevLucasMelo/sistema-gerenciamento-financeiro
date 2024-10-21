@@ -3,9 +3,6 @@ capaz de enviar relatórios financeiros baseado em transações cadastradas no b
 consultar transações com filtros específicos, consultar dashboards em tempo real feitos com os dados que estão no BD e com a ferramenta Metabase (Bussiness Inteligence). 
 
 
-Para a hospedagem da aplicação, optou-se por utilizar o Render e pode ser acessado em: https://sistema-gerenciamento-financeiro.onrender.com
-
-
 Tecnologias utilizadas no projeto:
 
 
