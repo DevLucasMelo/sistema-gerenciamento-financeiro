@@ -36,7 +36,8 @@
     </nav>
 
     <div class="container mt-4">
-        <h1 class="mb-4">Ordens de serviço</h1>
+
+        <h2 class="mb-4 text-center">Ordens de serviço</h2>
         
         <div class="table-responsive">
             <table class="table table-striped">
@@ -51,6 +52,7 @@
                         <th>Valor</th>
                         <th>Técnico Responsável</th>
                         <th>Status</th>
+                        <th>Impressão</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,8 +70,6 @@
                         <td><a href="{% url 'ordem_servico_template' ordemServico.ord_ser_numero %}" class="btn btn-primary">
                             Imprimir
                         </a></td>
-                        <td><button type="submit" id="btn-ordem-servico" class="btn btn-primary"> detalhes</button>
-                        </td>
                     </tr>
                     {% empty %}
                     <tr>

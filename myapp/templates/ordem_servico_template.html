@@ -12,7 +12,8 @@
     {% block content %}
 
     <div class="container mt-5">
-        <h2>Ordem de Serviço</h2>
+        
+        <h2 class="mb-4 text-center">Ordem de serviço</h2>
         <form>
             <!-- Campos da ordem de serviço -->
             <div class="mb-3">
@@ -62,7 +63,13 @@
         </form>
         
         <!-- Botão para imprimir -->
-        <button id="btn-imprimir" type="button" class="btn btn-primary mt-3" onclick="imprimirOrdemServico()">Imprimir Ordem de Serviço</button>
+        <div class="d-flex justify-content-center">
+        <button id="btn-imprimir" type="button" class="btn btn-primary mt-3" onclick="imprimirOrdemServico()"> Imprimir Ordem de Serviço</button>
+        </div>
+
+        <br>
+        <br>
+
     </div>
     {% endblock %}
 

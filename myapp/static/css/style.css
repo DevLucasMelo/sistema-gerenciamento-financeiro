@@ -1,3 +1,10 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #f8f9fa; 
+    color: #333;
+}
+
+
 #btn-financeiro {
     background-color: #3e65b9; 
     color: white; 
@@ -26,6 +33,15 @@
     background-color: #3e65b9; 
     color: white; 
     border: none; 
+}
+
+#btn-imprimir{
+    background-color: #3e65b9; 
+    color: white; 
+    border: none; 
+    font-size: 14pt;
+
+    padding: 20px;
 }
 
 #btn-cadastrar:hover{
@@ -206,14 +222,6 @@ h2 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
 }
 
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa; 
-    color: #333;
-}
-
-
 body, html {
     margin: 0;
     padding: 0;
@@ -223,10 +231,6 @@ body, html {
 .navbar-custom {
     max-width: 100vw; 
 }
-
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
-.fa-anchor,.fa-coffee {font-size:200px}
 
 
 .user-icon {

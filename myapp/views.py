@@ -7,6 +7,7 @@ from weasyprint import HTML, Attachment
 from io import BytesIO
 import random
 import os
+from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.template.loader import render_to_string
@@ -136,9 +137,10 @@ def transacoes_view(request):
 
     
     if tipo_filtro:
-        transacoes = Transacoes.objects.filter(tra_tipo=tipo_filtro)
+        transacoes = Transacoes.objects.filter(tra_tipo=tipo_filtro).prefetch_related('tra_tip_pag', 'tra_tip_ele', 'tra_cat', 'tra_mar')
     else:
-        transacoes = Transacoes.objects.only()
+        transacoes = Transacoes.objects.all().prefetch_related('tra_tip_pag', 'tra_tip_ele', 'tra_cat', 'tra_mar')
+
 
     paginator = Paginator(transacoes, 20)  
     page_number = request.GET.get('page')  
@@ -246,8 +248,8 @@ def enviar_email_com_pdf(caminho_pdf, data_inicio, data_fim, email):
 
     
     encoded_pdf = base64.b64encode(dados_pdf).decode()
-
-    
+    print(email)
+    print(email)
     message = Mail(
         from_email='meloeam1238@gmail.com',
         to_emails=f'{email}',
@@ -267,9 +269,11 @@ def enviar_email_com_pdf(caminho_pdf, data_inicio, data_fim, email):
 
     
     try:
-        sg_api_key = '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' 
+        load_dotenv()
+        sg_api_key = os.getenv('SENDGRID_API_KEY')
         sg = SendGridAPIClient(sg_api_key)
         response = sg.send(message)
+        print('enviou')
     except Exception as e:
         print(e)
 

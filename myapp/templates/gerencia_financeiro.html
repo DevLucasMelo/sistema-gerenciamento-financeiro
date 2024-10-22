@@ -40,43 +40,48 @@
         <h1 class="text-center mt-5">Painel de Gerenciamento</h1>
         <div class="row panel-container">
 
-            <div class="col-sm-6 col-md-4 mb-4">
+            <div class="col-sm-6 col-md-4 mb-4" id="ordens-servico">
                 <a href="{% url 'ordem_servico' %}" class="dashboard-panel text-decoration-none">
                     <i class="fas fa-bullseye"></i> 
                     <div class="dashboard-panel-title">Ordens de serviço</div>
                 </a>
             </div>
             
-            <div class="col-sm-6 col-md-4 mb-4">
+            <div class="col-sm-6 col-md-4 mb-4" id="gerencia-contas">
                 <a href="{% url 'gerencia_contas' %}" class="dashboard-panel text-decoration-none">
                     <i class="fas fa-wallet"></i> 
                     <div class="dashboard-panel-title">Gerenciar Contas</div>
                 </a>
             </div>
-            <div class="col-sm-6 col-md-4 mb-4">
+            
+            <div class="col-sm-6 col-md-4 mb-4" id="gerencia-usuarios">
                 <a href="{% url 'gerencia_usuarios' %}" class="dashboard-panel text-decoration-none">
                     <i class="fas fa-users"></i> 
                     <div class="dashboard-panel-title">Gerenciar Usuários</div>
                 </a>
             </div>
-            <div class="col-sm-6 col-md-4 mb-4">
+            
+            <div class="col-sm-6 col-md-4 mb-4" id="consulta-transacoes">
                 <a href="{% url 'consulta_transacoes' %}" class="dashboard-panel text-decoration-none">
                     <i class="fas fa-list-alt"></i> 
                     <div class="dashboard-panel-title">Consultar Transações</div>
                 </a>
             </div>
-            <div class="col-sm-6 col-md-4 mb-4">
+            
+            <div class="col-sm-6 col-md-4 mb-4" id="dashboard">
                 <a href="http://localhost:3000/public/dashboard/d75d090b-2674-4bc7-9e58-5061eb631bad" class="dashboard-panel text-decoration-none">
                     <i class="fas fa-chart-line"></i> 
                     <div class="dashboard-panel-title">Dashboard</div>
                 </a>
             </div>
-            <div class="col-sm-6 col-md-4 mb-4">
+            
+            <div class="col-sm-6 col-md-4 mb-4" id="relatorios-financeiros">
                 <a href="{% url 'relatorio_financeiro' %}" class="dashboard-panel text-decoration-none">
                     <i class="fas fa-file-alt"></i> 
                     <div class="dashboard-panel-title">Relatórios Financeiros</div>
                 </a>
             </div>
+            
             
         </div>
     </div>
